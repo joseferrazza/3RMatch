@@ -28,76 +28,158 @@ Entre as principais funcionalidades do sistema estão:
 4. Um coletor aceita a solicitação e o sistema cria um match.
 5. A coleta é realizada e registrada no sistema.
 
-## Requisitos Funcionais (RF)
-### Gestão de Usuários
+## Requisitos
+### Requisitos Funcionais (RF)
+#### Gestão de Usuários
 RF01 – O sistema deve permitir o cadastro de usuários utilizando autenticação via SSO (Google, Facebook ou Apple).
 RF02 – O sistema deve permitir que o usuário informe seus dados básicos (nome, endereço e telefone).
 RF03 – O sistema deve permitir que o usuário selecione seu tipo de perfil (Usuário ou Coletor).
 RF04 – O sistema deve permitir a visualização das informações do perfil cadastrado.
-
-### Cadastro de Materiais
+#### Cadastro de Materiais
 RF05 – O sistema deve permitir que usuários cadastrem materiais recicláveis disponíveis para coleta.
 RF06 – O sistema deve permitir informar o tipo e a quantidade de material.
 RF07 – O sistema deve exibir a lista de materiais cadastrados para consulta.
-
-### Localização de Coletores
+#### Localização de Coletores
 RF08 – O sistema deve exibir coletores disponíveis próximos ao usuário.
 RF09 – O sistema deve apresentar os coletores em formato de lista e em visualização de mapa.
 RF10 – O sistema deve permitir que o usuário visualize informações básicas do coletor (nome e distância).
-
-### Sistema de Match
+#### Sistema de Match
 RF11 – O sistema deve sugerir coletores com base na localização e no tipo de material disponível.
 RF12 – O sistema deve permitir que o usuário solicite a coleta a um coletor disponível.
 RF13 – O sistema deve permitir que o coletor aceite ou recuse solicitações de coleta.
 RF14 – O sistema deve registrar a criação de um match entre usuário e coletor.
-
-### Solicitações de Coleta
+#### Solicitações de Coleta
 RF15 – O sistema deve registrar as solicitações de coleta realizadas.
 RF16 – O sistema deve permitir o acompanhamento do status da coleta (pendente, aceita, concluída).
-###  Histórico de Coletas
+####  Histórico de Coletas
 RF17 – O sistema deve manter um histórico das coletas realizadas.
 RF18 – O sistema deve permitir a visualização dos detalhes das coletas anteriores.
 
-## Requisitos Não Funcionais (RNF)
-
-### Desempenho
+### Requisitos Não Funcionais (RNF)
+#### Desempenho
 RNF01 – O sistema deve responder às requisições do usuário em até 2 segundos, em condições normais de uso.
 RNF02 – O sistema deve suportar múltiplos usuários simultâneos sem degradação significativa de desempenho.
 RNF03 – As operações de consulta (ex: listagem de materiais e coletores) devem ser rápidas (resposta inferior a 5 segundos).
-
-### Segurança
+#### Segurança
 RNF04 – O sistema deve garantir autenticação segura via SSO (Google, Facebook e Apple).
 RNF05 – O sistema deve proteger os dados dos usuários contra acesso não autorizado.
 RNF06 – O sistema deve utilizar comunicação segura via HTTPS.
 RNF07 – Informações sensíveis devem ser armazenadas de forma segura.
-
-### Usabilidade
+#### Usabilidade
 RNF08 – O sistema deve possuir interface intuitiva e de fácil utilização.
 RNF09 – O sistema deve ser responsivo, funcionando em dispositivos móveis e desktops.
 RNF10 – O fluxo principal (cadastro → match → coleta) deve ser simples e direto.
-
-### Disponibilidade
+#### Disponibilidade
 RNF11 – O sistema deve estar disponível 24 horas por dia, 7 dias por semana, salvo períodos de manutenção.
 RNF12 – O sistema deve possuir alta disponibilidade, minimizando indisponibilidades.
-
-### Escalabilidade
+#### Escalabilidade
 RNF13 – O sistema deve ser capaz de escalar para suportar aumento no número de usuários e transações.
 RNF14 – A arquitetura deve permitir expansão futura sem necessidade de grandes mudanças estruturais.
-
-### Manutenibilidade
+#### Manutenibilidade
 RNF15 – O código do sistema deve ser organizado e modular.
 RNF16 – O sistema deve ser de fácil manutenção e evolução.
 RNF17 – O sistema deve seguir boas práticas de desenvolvimento (ex: componentização no frontend).
-
-### Confiabilidade
+#### Confiabilidade
 RNF18 – O sistema deve garantir consistência das informações registradas.
 RNF19 – O sistema deve evitar perda de dados em caso de falhas.
 RNF20 – O sistema deve registrar eventos importantes (ex: solicitações de coleta).
-
-### Compatibilidade
+#### Compatibilidade
 RNF21 – O sistema deve ser compatível com os principais navegadores modernos (Chrome, Edge, Firefox).
 RNF22 – O sistema deve funcionar corretamente em diferentes tamanhos de tela.
 
-## Tecnologias
+## Diagramas
+### Diagramas de Sequência
 
-Em definição
+#### Login com SSO
+```mermaid
+sequenceDiagram
+actor Usuario
+participant App as App 3RMatch
+participant SSO as Provedor SSO
+
+Usuario->>App: Acessa tela de login
+Usuario->>App: Escolhe SSO
+App->>SSO: Solicita autenticacao
+SSO->>Usuario: Tela de login externa
+Usuario->>SSO: Informa credenciais
+SSO->>App: Retorna autenticacao
+App->>Usuario: Redireciona para Home
+```
+
+#### Manutenção de Usuário
+```mermaid
+sequenceDiagram
+actor Usuario
+participant App
+participant Sistema
+
+Usuario->>App: Acessa tela de usuario
+App->>Sistema: Solicita dados do usuario
+Sistema->>App: Retorna dados atuais
+Usuario->>App: Atualiza informacoes (nome, endereco, tipo)
+App->>Sistema: Envia dados atualizados
+Sistema->>Sistema: Valida informacoes
+Sistema->>App: Confirma atualizacao
+App->>Usuario: Exibe mensagem de sucesso
+```
+
+#### Cadastrar Material
+```mermaid
+sequenceDiagram
+actor Usuario
+participant App
+participant Sistema
+
+Usuario->>App: Acessa tela de materiais
+Usuario->>App: Informa tipo e quantidade
+App->>Sistema: Envia dados do material
+Sistema->>Sistema: Valida dados
+Sistema->>App: Confirma cadastro
+App->>Usuario: Exibe material na lista
+```
+
+#### Localizar Coletor
+```mermaid
+sequenceDiagram
+actor Usuario
+participant App
+participant Sistema
+
+Usuario->>App: Acessa tela de mapa
+App->>Sistema: Solicita coletores proximos
+Sistema->>Sistema: Filtra por localizacao
+Sistema->>App: Retorna coletores
+App->>Usuario: Exibe lista e mapa
+```
+
+#### Solicitar Coleta
+```mermaid
+sequenceDiagram
+actor Usuario
+participant App
+participant Sistema
+actor Coletor
+
+Usuario->>App: Seleciona coletor
+App->>Usuario: Confirma solicitacao
+Usuario->>App: Confirma
+App->>Sistema: Cria solicitacao
+Sistema->>Coletor: Notifica coletor
+Coletor->>Sistema: Aceita solicitacao
+Sistema->>App: Atualiza status (match)
+App->>Usuario: Informa coleta confirmada
+```
+
+#### Registrar Coleta
+```mermaid
+sequenceDiagram
+actor Coletor
+participant Sistema
+participant App
+actor Usuario
+
+Coletor->>Sistema: Marca como concluida
+Sistema->>Sistema: Registra historico
+Sistema->>App: Atualiza status
+App->>Usuario: Notifica conclusao
+```
