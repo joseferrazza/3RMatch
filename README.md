@@ -28,7 +28,7 @@ Entre as principais funcionalidades do sistema estão:
 4. Um coletor aceita a solicitação e o sistema cria um match.
 5. A coleta é realizada e registrada no sistema.
 
-## Requisitos Funcionais
+## Requisitos Funcionais (RF)
 ### Gestão de Usuários
 RF01 – O sistema deve permitir o cadastro de usuários utilizando autenticação via SSO (Google, Facebook ou Apple).
 RF02 – O sistema deve permitir que o usuário informe seus dados básicos (nome, endereço e telefone).
@@ -57,6 +57,46 @@ RF16 – O sistema deve permitir o acompanhamento do status da coleta (pendente,
 ###  Histórico de Coletas
 RF17 – O sistema deve manter um histórico das coletas realizadas.
 RF18 – O sistema deve permitir a visualização dos detalhes das coletas anteriores.
+
+## Requisitos Não Funcionais (RNF)
+
+### Desempenho
+RNF01 – O sistema deve responder às requisições do usuário em até 2 segundos, em condições normais de uso.
+RNF02 – O sistema deve suportar múltiplos usuários simultâneos sem degradação significativa de desempenho.
+RNF03 – As operações de consulta (ex: listagem de materiais e coletores) devem ser rápidas (resposta inferior a 5 segundos).
+
+### Segurança
+RNF04 – O sistema deve garantir autenticação segura via SSO (Google, Facebook e Apple).
+RNF05 – O sistema deve proteger os dados dos usuários contra acesso não autorizado.
+RNF06 – O sistema deve utilizar comunicação segura via HTTPS.
+RNF07 – Informações sensíveis devem ser armazenadas de forma segura.
+
+### Usabilidade
+RNF08 – O sistema deve possuir interface intuitiva e de fácil utilização.
+RNF09 – O sistema deve ser responsivo, funcionando em dispositivos móveis e desktops.
+RNF10 – O fluxo principal (cadastro → match → coleta) deve ser simples e direto.
+
+### Disponibilidade
+RNF11 – O sistema deve estar disponível 24 horas por dia, 7 dias por semana, salvo períodos de manutenção.
+RNF12 – O sistema deve possuir alta disponibilidade, minimizando indisponibilidades.
+
+### Escalabilidade
+RNF13 – O sistema deve ser capaz de escalar para suportar aumento no número de usuários e transações.
+RNF14 – A arquitetura deve permitir expansão futura sem necessidade de grandes mudanças estruturais.
+
+### Manutenibilidade
+RNF15 – O código do sistema deve ser organizado e modular.
+RNF16 – O sistema deve ser de fácil manutenção e evolução.
+RNF17 – O sistema deve seguir boas práticas de desenvolvimento (ex: componentização no frontend).
+
+### Confiabilidade
+RNF18 – O sistema deve garantir consistência das informações registradas.
+RNF19 – O sistema deve evitar perda de dados em caso de falhas.
+RNF20 – O sistema deve registrar eventos importantes (ex: solicitações de coleta).
+
+### Compatibilidade
+RNF21 – O sistema deve ser compatível com os principais navegadores modernos (Chrome, Edge, Firefox).
+RNF22 – O sistema deve funcionar corretamente em diferentes tamanhos de tela.
 
 ## Tecnologias
 
