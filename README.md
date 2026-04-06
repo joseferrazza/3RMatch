@@ -88,6 +88,110 @@ RNF21 – O sistema deve ser compatível com os principais navegadores modernos 
 RNF22 – O sistema deve funcionar corretamente em diferentes tamanhos de tela.
 
 ## Diagramas
+### Diagramas de Caso de Uso 
+#### Visão Geral
+```mermaid
+flowchart LR
+    %% Atores
+    Usuario((Usuario))
+    Coletor((Coletor))
+    Sistema((Sistema))
+
+    %% Casos de uso principais
+    Login[Login via SSO]
+    ManterPerfil[Manter perfil]
+    CadastrarMaterial[Cadastrar material]
+    ConsultarColetores[Consultar coletores proximos]
+    SolicitarColeta[Solicitar coleta]
+    GerarMatch[Gerar match]
+    AceitarColeta[Aceitar coleta]
+    RealizarColeta[Realizar coleta]
+    RegistrarColeta[Registrar coleta]
+    Avaliar[Realizar avaliacao]
+
+    %% Relacionamentos
+    Usuario --> Login
+    Usuario --> ManterPerfil
+    Usuario --> CadastrarMaterial
+    Usuario --> ConsultarColetores
+    Usuario --> SolicitarColeta
+    Usuario --> Avaliar
+
+    Coletor --> Login
+    Coletor --> ManterPerfil
+    Coletor --> AceitarColeta
+    Coletor --> RealizarColeta
+    Coletor --> Avaliar
+
+    Sistema --> GerarMatch
+    Sistema --> RegistrarColeta
+
+    %% Includes (simulados)
+    SolicitarColeta -.->|<<include>>| GerarMatch
+    RealizarColeta -.->|<<include>>| RegistrarColeta
+
+    %% Extends (simulados)
+    Avaliar -.->|<<extend>>| RegistrarColeta
+```
+#### Usuário
+```mermaid
+flowchart LR
+    Usuario((Usuario))
+
+    Login[Login via SSO]
+    ManterPerfil[Manter perfil]
+    CadastrarMaterial[Cadastrar material]
+    SolicitarColeta[Solicitar coleta]
+    AvaliarColetor[Avaliar coletor]
+
+    GerarMatch[Gerar match]
+
+    Usuario --> Login
+    Usuario --> ManterPerfil
+    Usuario --> CadastrarMaterial
+    Usuario --> SolicitarColeta
+    Usuario --> AvaliarColetor
+
+    SolicitarColeta -.->|<<include>>| GerarMatch
+```
+#### Coletor
+```mermaid
+flowchart LR
+    Coletor((Coletor))
+
+    Login[Login via SSO]
+    ManterPerfil[Manter perfil]
+    AceitarColeta[Aceitar coleta]
+    RealizarColeta[Realizar coleta]
+    AvaliarUsuario[Avaliar usuario]
+
+    RegistrarColeta[Registrar coleta]
+
+    Coletor --> Login
+    Coletor --> ManterPerfil
+    Coletor --> AceitarColeta
+    Coletor --> RealizarColeta
+    Coletor --> AvaliarUsuario
+
+    RealizarColeta -.->|<<include>>| RegistrarColeta
+```
+#### Sistema
+```mermaid
+flowchart LR
+    Sistema((Sistema))
+
+    SugerirMatch[Sugerir match]
+    NotificarColetor[Notificar coletor]
+    RegistrarColeta[Registrar coleta]
+    ManterHistorico[Manter historico]
+    GerenciarAvaliacoes[Gerenciar avaliacoes]
+
+    Sistema --> SugerirMatch
+    Sistema --> NotificarColetor
+    Sistema --> RegistrarColeta
+    Sistema --> ManterHistorico
+    Sistema --> GerenciarAvaliacoes
+```
 ### Diagramas de Sequência
 
 #### Login com SSO
@@ -183,3 +287,56 @@ Sistema->>Sistema: Registra historico
 Sistema->>App: Atualiza status
 App->>Usuario: Notifica conclusao
 ```
+### Diagramas de Estado
+
+#### Estado do Usuário
+```mermaid
+stateDiagram-v2
+[*] --> NaoAutenticado
+NaoAutenticado --> Autenticado : Login (SSO)
+Autenticado --> PerfilIncompleto : Primeiro acesso
+PerfilIncompleto --> PerfilCompleto : Cadastro concluido
+PerfilCompleto --> PerfilAtualizado : Edicao de dados
+PerfilAtualizado --> PerfilCompleto
+Autenticado --> [*] : Logout
+```
+#### Estado do Material
+```mermaid
+stateDiagram-v2
+[*] --> NaoCadastrado
+NaoCadastrado --> Disponivel : Cadastro realizado
+Disponivel --> EmColeta : Coletor solicitado
+EmColeta --> Coletado : Coleta concluida
+Coletado --> [*]
+```
+#### Estado da Solicitação de Coleta
+```mermaid
+stateDiagram-v2
+[*] --> SemMatch
+SemMatch --> Pendente : Solicitacao criada
+Pendente --> Aceito : Coletor aceita
+Pendente --> Recusado : Coletor recusa
+Aceito --> EmColeta
+EmColeta --> Concluido
+Concluido --> [*]
+Recusado --> [*]
+```
+#### Estado da Coleta
+```mermaid
+stateDiagram-v2
+[*] --> Agendada
+Agendada --> EmAndamento
+EmAndamento --> Finalizada
+Finalizada --> Avaliada
+Avaliada --> [*]
+```
+
+## Protótipos de Telas
+### Login
+
+### Usuário
+
+### Material
+
+### Match
+
