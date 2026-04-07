@@ -332,14 +332,38 @@ Avaliada --> [*]
 ```
 
 ## Protótipos de Telas
-### Login
+### Tela do Login
 <p align="center">
   <img src="https://github.com/joseferrazza/3RMatch/blob/main/docs/telas/3RMatchLogin.PNG?raw=true" width="300"/>
 </p>
 
-### Usuário
+### Tela do Menu
+<p align="center">
+  <img src="https://github.com/joseferrazza/3RMatch/blob/main/docs/telas/3RMatchMenu.PNG?raw=true" width="300"/>
+</p>
 
-### Material
+### Tela do Cadastro de Usuário
+<p align="center">
+  <img src="https://github.com/joseferrazza/3RMatch/blob/main/docs/telas/3RMatchUsuario.PNG?raw=true" width="300"/>
+</p>
 
-### Match
+### Tela do Cadastro de Materiais
+<p align="center">
+  <img src="https://github.com/joseferrazza/3RMatch/blob/main/docs/telas/3RMatchMaterial.PNG?raw=true" width="300"/>
+</p>
+
+### Tela de Localização de Coletores
+<p align="center">
+  <img src="https://github.com/joseferrazza/3RMatch/blob/main/docs/telas/3RMatchMapa.PNG?raw=true" width="300"/>
+</p>
+
+### Tela de Match
+<p align="center">
+  <img src="https://github.com/joseferrazza/3RMatch/blob/main/docs/telas/3RMatchMatch.PNG?raw=true" width="300"/>
+</p>
+
+### Tela de Histórico de Coletas
+<p align="center">
+  <img src="https://github.com/joseferrazza/3RMatch/blob/main/docs/telas/3RMatchHistorico.PNG?raw=true" width="300"/>
+</p>
 
