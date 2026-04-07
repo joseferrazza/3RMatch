@@ -334,7 +334,7 @@ Avaliada --> [*]
 ## Protótipos de Telas
 ### Login
 <p align="center">
-  <img src=".docs/telas/3RMatchLogin.PNG" width="300"/>
+  <img src="https://github.com/joseferrazza/3RMatch/blob/main/docs/telas/3RMatchLogin.PNG?raw=true" width="300"/>
 </p>
 
 ### Usuário
