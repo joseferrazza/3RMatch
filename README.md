@@ -22,7 +22,7 @@ Entre as principais funcionalidades do sistema estão:
 
 ## Como usar
 
-1. Crie uma conta no sistema.
+1. Crie uma conta no sistema (e-mail ou via SSO).
 2. Informe a disponibilização do material reciclável.
 3. O sistema identifica coletores próximos interessados no material.
 4. Um coletor aceita a solicitação e o sistema cria um match.
