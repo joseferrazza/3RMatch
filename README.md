@@ -1,6 +1,7 @@
 # 3RMatch
 
 ![License](https://img.shields.io/badge/license-MIT-green)
+![Static Badge](https://img.shields.io/badge/Status-Em_modelagem-blue)
 
 ## Nome do projeto
 
