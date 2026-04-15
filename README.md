@@ -2,6 +2,10 @@
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Static Badge](https://img.shields.io/badge/Status-Em_modelagem-blue)
+![Static Badge](https://img.shields.io/badge/Data%20Base-My_SQL-orange)
+![Static Badge](https://img.shields.io/badge/Front end- React -orange)
+![Static Badge](https://img.shields.io/badge/Back end- TBD -orange)
+
 
 ## Nome do projeto
 
